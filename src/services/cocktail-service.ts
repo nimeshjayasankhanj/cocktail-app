@@ -24,7 +24,7 @@ const fetchDataFromAPI = async () => {
   const cocktailData: CocktailObject[] = [];
   for (let i = 0; i < 5; i++) {
     const response = await axios.get(
-      `https://thecocktaildb.com/api/json/v1/1/random.php`
+      process.env.REACT_APP_RANDOM_API as string
     );
     const data = {
       id: response.data.drinks[0].idDrink,
@@ -42,10 +42,10 @@ const fetchDataFromAPIUsingSearchValues = async (search: string) => {
   const cocktailData: CocktailObject[] = [];
 
   const response = await axios.get(
-    `https://thecocktaildb.com/api/json/v1/1/search.php?s=${search}
+    `${process.env.REACT_APP_SEARCH_API}?s=${search}
 `
   );
-  response.data.drinks.forEach((value: any) => {
+  response?.data?.drinks.forEach((value: any) => {
     const data = {
       id: value.idDrink,
       name: value.strDrink,
