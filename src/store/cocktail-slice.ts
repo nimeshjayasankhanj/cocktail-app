@@ -35,6 +35,8 @@ const CocktailSlice = createSlice({
       })
       .addCase(cocktails.rejected, (state, action) => {
         state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
       });
   },
 });
