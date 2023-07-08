@@ -15,12 +15,13 @@ import LiquorIcon from "@mui/icons-material/Liquor";
 
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { RootStore } from "src/store";
 
 const pages = ["home", "favorites"];
 
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const { data } = useSelector((state: any) => state.favorite);
+  const { data } = useSelector((state: RootStore) => state.favorite);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
