@@ -35,7 +35,8 @@ export const CocktailCard = ({
             textOverflow: "ellipsis",
             overflow: " hidden",
             whiteSpace: "nowrap",
-            textAlign: "right",
+            textAlign: "center",
+            fontWeight: "bold",
           }}
           aria-label="cocktail-name"
         >
@@ -46,7 +47,7 @@ export const CocktailCard = ({
             textOverflow: "ellipsis",
             overflow: " hidden",
             whiteSpace: "nowrap",
-            textAlign: "right",
+            textAlign: "center",
           }}
         >
           <Chip
@@ -61,7 +62,7 @@ export const CocktailCard = ({
           />
         </Box>
 
-        <Box style={{ textAlign: "right" }}>
+        <Box style={{ textAlign: "center", paddingTop: "10px" }}>
           {isFavoritePage && removeFavoriteItem ? (
             <DeleteForeverIcon
               aria-label={`delete-favorite${index}`}
