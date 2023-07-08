@@ -21,7 +21,7 @@ const pages = ["home", "favorites"];
 
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const { data } = useSelector((state: RootStore) => state.favorite);
+  const { favorites } = useSelector((state: RootStore) => state.favorite);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -97,7 +97,7 @@ export const Header = () => {
             </Link>
             <Link to="/favorites" className="text-white">
               <IconButton size="large" aria-label="Go to home" color="inherit">
-                <Badge badgeContent={data.length} color="error">
+                <Badge badgeContent={favorites.length} color="error">
                   <Typography color="white">Favorites </Typography>
                 </Badge>
               </IconButton>

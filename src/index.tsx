@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import { ThemeProvider } from "@mui/material";
 import theme from "src/theme/theme";
+import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

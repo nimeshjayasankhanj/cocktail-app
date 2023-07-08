@@ -45,16 +45,18 @@ const fetchDataFromAPIUsingSearchValues = async (search: string) => {
     `${process.env.REACT_APP_SEARCH_API}?s=${search}
 `
   );
-  response?.data?.drinks.forEach((value: any) => {
-    const data = {
-      id: value.idDrink,
-      name: value.strDrink,
-      category: value.strCategory,
-      image: value.strDrinkThumb,
-      is_favorite: false,
-    };
-    cocktailData.push(data);
-  });
+  if (response.data.drinks) {
+    response?.data?.drinks.forEach((value: any) => {
+      const data = {
+        id: value.idDrink,
+        name: value.strDrink,
+        category: value.strCategory,
+        image: value.strDrinkThumb,
+        is_favorite: false,
+      };
+      cocktailData.push(data);
+    });
+  }
 
   return cocktailData;
 };

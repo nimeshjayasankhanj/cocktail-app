@@ -13,6 +13,8 @@ import { addToFavoriteLists } from "src/store/favorite-slice";
 import { useDispatch, useSelector } from "react-redux";
 import { CocktailObject } from "src/DTO/store";
 
+import { toast } from "react-toastify";
+
 const Home = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [search, setSearch] = useState<string>("");
@@ -29,10 +31,19 @@ const Home = () => {
   const { data, isLoading, isSuccess, isError } = useSelector(
     (state: RootStore) => state.cocktails
   );
+  const { favorites } = useSelector((state: RootStore) => state.favorite);
 
   const markAsFavorite = (favoriteCocktail: CocktailObject) => {
     dispatch(markAsFavoriteCocktail(favoriteCocktail));
     dispatch(addToFavoriteLists(favoriteCocktail));
+    const isRecordAvailable = Boolean(
+      favorites.find((favorite) => favorite.id === favoriteCocktail.id)
+    );
+    if (isRecordAvailable) {
+      toast.success("Remove from the favorite");
+    } else {
+      toast.success("Added to favorite");
+    }
   };
 
   const searchData = () => {
@@ -47,9 +58,6 @@ const Home = () => {
 
   if (isLoading) {
     return <Loader />;
-  }
-  if (isSuccess && data.length === 0) {
-    return <Empty />;
   }
 
   if (isError) {
@@ -73,18 +81,22 @@ const Home = () => {
         </Grid>
       </Grid>
 
-      <Grid container spacing={10}>
-        {data.map((value: CocktailObject, index: number) => (
-          <Grid item xs={12} md={3} sm={6} key={value.id}>
-            <CocktailCard
-              value={value}
-              markAsFavorite={markAsFavorite}
-              isSearchEnable={isSearchEnable}
-              index={index}
-            />
-          </Grid>
-        ))}
-      </Grid>
+      {isSuccess && data.length === 0 ? (
+        <Empty />
+      ) : (
+        <Grid container spacing={10}>
+          {data.map((value: CocktailObject, index: number) => (
+            <Grid item xs={12} md={3} sm={6} key={value.id}>
+              <CocktailCard
+                value={value}
+                markAsFavorite={markAsFavorite}
+                isSearchEnable={isSearchEnable}
+                index={index}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </>
   );
 };

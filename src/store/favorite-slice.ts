@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { CocktailObject } from "src/DTO/store";
 
 type FavoriteState = {
-  data: CocktailObject[];
+  favorites: CocktailObject[];
 };
 
 const initialState: FavoriteState = {
-  data: [],
+  favorites: [],
 };
 
 const FavoriteCocktailSlice = createSlice({
@@ -15,20 +15,20 @@ const FavoriteCocktailSlice = createSlice({
   reducers: {
     addToFavoriteLists: (state, action) => {
       const { id } = action.payload;
-      const isRecordExists = state.data.find(
+      const isRecordExists = state.favorites.find(
         (value: CocktailObject) => value.id === id
       );
       if (!isRecordExists) {
-        state.data.push(action.payload);
+        state.favorites.push(action.payload);
       } else {
-        state.data = state.data.filter(
+        state.favorites = state.favorites.filter(
           (value: CocktailObject) => value.id !== id
         );
       }
     },
     removeItemFromFavorite: (state, action) => {
       const { id } = action.payload;
-      state.data = state.data.filter(
+      state.favorites = state.favorites.filter(
         (value: CocktailObject) => value.id !== id
       );
     },
